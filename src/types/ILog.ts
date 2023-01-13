@@ -1,4 +1,3 @@
-
 // single log entity interface
 
 export default interface ILog {
@@ -14,5 +13,5 @@ export default interface ILog {
   ownerId: string;
   logInfo: string;
   creationTimestamp: string;
-  creationDate: Date;   
+  creationDate: Date;
 }
