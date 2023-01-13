@@ -7,7 +7,10 @@ import SelectField from "./SelectField";
 import TextField from "./TextField";
 
 type Props = {
-  onSubmit: (stringFilters: StringLogFilter[], dateFilter: DateLogFilter) => void;
+  onSubmit: (
+    stringFilters: StringLogFilter[],
+    dateFilter: DateLogFilter
+  ) => void;
 };
 
 type FormValues = {
@@ -23,6 +26,23 @@ type FormKey = keyof FormValues & keyof ILog;
 const FiltersForm = ({ onSubmit }: Props) => {
   const { register, handleSubmit } = useForm<FormValues>();
 
+  const setUrlSearchQuery = (
+    stringFilters: StringLogFilter[],
+    dateFilter: DateLogFilter
+  ) => {
+    const params: Record<string, string> = {};
+    stringFilters.forEach(
+      (filter) => (params[String(filter.key)] = filter.value)
+    );
+    if(dateFilter.start) params["startDate"] = dateFilter.start.toDateString();
+    if(dateFilter.end) params["endDate"] = dateFilter.end.toDateString();
+    window.history.replaceState(
+      null,
+      "",
+      "?" + new URLSearchParams(params).toString()
+    );
+  };
+
   const onFormSubmit = (formData: FormValues) => {
     const filtersKeys = ["logId", "applicationType", "actionType"] as FormKey[];
     const stringFilters: StringLogFilter[] = filtersKeys
@@ -31,10 +51,12 @@ const FiltersForm = ({ onSubmit }: Props) => {
         key,
         value: formData[key],
       }));
+
     const dateFilter: DateLogFilter = {};
     if (formData.startDate) dateFilter.start = new Date(formData.startDate);
     if (formData.endDate) dateFilter.end = new Date(formData.endDate);
 
+    setUrlSearchQuery(stringFilters, dateFilter);
     onSubmit(stringFilters, dateFilter);
   };
 
