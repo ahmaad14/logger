@@ -5,7 +5,7 @@ const sortLogs = (logs: ILog[], sortyBy?: keyof ILog) => {
   const compareBasedOnType = (column1: any, column2: any) => {
     switch (typeof column1) {
       case "string":
-        return column1.localeCompare(column2);
+        return column1?.localeCompare(column2);
       default:
         return column1 - column2;
     }

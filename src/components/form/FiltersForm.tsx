@@ -34,8 +34,8 @@ const FiltersForm = ({ onSubmit }: Props) => {
     stringFilters.forEach(
       (filter) => (params[String(filter.key)] = filter.value)
     );
-    if(dateFilter.start) params["startDate"] = dateFilter.start.toDateString();
-    if(dateFilter.end) params["endDate"] = dateFilter.end.toDateString();
+    if (dateFilter.start) params["startDate"] = dateFilter.start.toDateString();
+    if (dateFilter.end) params["endDate"] = dateFilter.end.toDateString();
     window.history.replaceState(
       null,
       "",
@@ -63,7 +63,12 @@ const FiltersForm = ({ onSubmit }: Props) => {
   return (
     <form onSubmit={handleSubmit(onFormSubmit)}>
       <div className="row align-items-end mb-5">
-        <TextField label="Log ID" name="logId" register={register} />
+        <TextField
+          label="Log ID"
+          name="logId"
+          register={register}
+          data-testid={"form-logId"}
+        />
         <SelectField
           name="applicationType"
           label="Application Type"
@@ -72,6 +77,7 @@ const FiltersForm = ({ onSubmit }: Props) => {
             value: type,
           }))}
           register={register}
+          data-testid={"form-applicationType"}
         />
         <SelectField
           name="actionType"
@@ -81,6 +87,7 @@ const FiltersForm = ({ onSubmit }: Props) => {
             value: type,
           }))}
           register={register}
+          data-testid={"form-actionType"}
         />
 
         <TextField
@@ -96,7 +103,11 @@ const FiltersForm = ({ onSubmit }: Props) => {
           register={register}
         />
         <div className="col-md-2">
-          <button type="submit" className="btn btn-primary">
+          <button
+            data-testid="search-btn"
+            type="submit"
+            className="btn btn-primary"
+          >
             Search Logger
           </button>
         </div>

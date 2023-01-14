@@ -19,8 +19,8 @@ const SelectField = ({ name, label, options, register, ...rest }: Props) => {
       <label className="py-2 text-secondary" htmlFor={name}> {label} </label>
       <select className="form-control" name={name} {...rest} {...registerProps}>
         <option value=""> Any </option>
-        {options.map((option) => (
-          <option value={option.value}> {option.label} </option>
+        {options.map((option, index) => (
+          <option key={index} value={option.value}> {option.label} </option>
         ))}
       </select>
     </div>

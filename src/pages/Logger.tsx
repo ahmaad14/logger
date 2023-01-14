@@ -5,8 +5,13 @@ import useProcessLogs from "../utils/useProcessLogs";
 
 const Logger = () => {
   const rowsPerPage = 10;
-  const [pageData, pagesCount ,handleSort, handleFiltersFormSubmit, handlePageChange] =
-    useProcessLogs(rowsPerPage);
+  const [
+    pageData,
+    pagesCount,
+    handleSort,
+    handleFiltersFormSubmit,
+    handlePageChange,
+  ] = useProcessLogs(rowsPerPage);
 
   return (
     <>

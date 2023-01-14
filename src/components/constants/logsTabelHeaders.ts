@@ -21,7 +21,7 @@ const logsTableHeaders = [
   },
   {
     label: "Date : Time",
-    key: "creationDate",
+    key: "creationTimestamp",
   },
 ];
 

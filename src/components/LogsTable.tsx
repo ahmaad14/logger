@@ -11,12 +11,13 @@ const LogsTable = ({ logs, handleSort }: Props) => {
     <table className="table">
       <thead>
         <tr>
-          {logsTabelHeaders.map((header) => (
-            <th scope="col">
+          {logsTabelHeaders.map((header, index) => (
+            <th key={index} scope="col">
               {header.label}
               <button
                 className="btn py-0 align-baseline"
                 onClick={() => handleSort(header.key as keyof ILog)}
+                data-testid={`sort-${header.key}`}
               >
                 <UpArrow />
               </button>
@@ -25,14 +26,19 @@ const LogsTable = ({ logs, handleSort }: Props) => {
         </tr>
       </thead>
       <tbody>
-        {logs.map((row) => (
-          <tr>
-            <td> {row.logId} </td>
-            <td> {row.applicationType} </td>
-            <td> {row.applicationId} </td>
-            <td> {row.actionType} </td>
+        {logs.map((row, index) => (
+          <tr key={index} data-testid="log-row">
+            <td data-testid={`logId${index}`}> {row.logId} </td>
+            <td data-testid={`applicationType${index}`}>
+              {row.applicationType}
+            </td>
+            <td data-testid={`applicationId${index}`}> {row.applicationId} </td>
+            <td data-testid={`actionType${index}`}> {row.actionType} </td>
             <td> </td>
-            <td> {row.creationTimestamp} </td>
+            <td data-testid={`creationTimestamp${index}`}>
+              {" "}
+              {row.creationTimestamp}{" "}
+            </td>
           </tr>
         ))}
       </tbody>
