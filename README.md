@@ -12,7 +12,7 @@ npm install
 npm start
 
 # View 
-Open [http://localhost:3000](http://localhost:3000) .
+Visit http://localhost:3000 .
 
 ```
 
